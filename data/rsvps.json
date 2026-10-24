@@ -1,0 +1,29 @@
+[
+  {
+    "id": "rsvp-1792846831554",
+    "name": "Pastor & Mrs. Maurice Jr.",
+    "phone": "08012345678",
+    "status": "Joyfully Attending (Ceremony & Reception)",
+    "guests": "2 Guests",
+    "message": "Glory to Jesus! May your union be crowned with everlasting joy and divine favor.",
+    "timestamp": "2026-10-24T13:00:31.553Z"
+  },
+  {
+    "id": "rsvp-1792846714818",
+    "name": "Test Guest",
+    "phone": "08099998888",
+    "status": "Joyfully Attending (Ceremony & Reception)",
+    "guests": "2 Guests",
+    "message": "God bless Constance and Onyekachi richly!",
+    "timestamp": "2026-10-24T12:58:34.818Z"
+  },
+  {
+    "id": "rsvp-initial-1",
+    "name": "Elder & Deaconess Amadi",
+    "phone": "08031234567",
+    "status": "Joyfully Attending (Ceremony & Reception)",
+    "guests": "2 Guests",
+    "message": "May the almighty Lord establish your home in everlasting peace, divine favor, and overflowing fruitfulness! Congratulations Constance and Onyekachi!",
+    "timestamp": "2026-10-24T09:30:00Z"
+  }
+]

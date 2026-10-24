@@ -1,0 +1,19 @@
+{
+  "name": "constance-onyekachi-wedding-3d",
+  "version": "1.0.0",
+  "description": "3D Luxury Wedding Invitation Website for Constance Onyinyechi David & Onyekachi Onyedinma",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "wedding",
+    "3d",
+    "threejs",
+    "invitation",
+    "luxury"
+  ],
+  "author": "Antigravity",
+  "license": "ISC"
+}

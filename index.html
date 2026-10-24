@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constance & Onyekachi | The Royal Wedding Celebration</title>
+  
+  <!-- Meta for Social Sharing -->
+  <meta name="description" content="Solemnization of Holy Matrimony of Constance Onyinyechi David & Onyekachi Onyedinma on Saturday, 28th November 2026.">
+  <meta property="og:title" content="Constance & Onyekachi Wedding Invitation">
+  <meta property="og:description" content="Sat. 28th Nov 2026 | 10:00 AM | St. Marks Anglican Church, Oyigbo & Limewood Hotel Royale, Port Harcourt.">
+  <meta property="og:image" content="assets/original-invitation.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Three.js 3D WebGL Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- GSAP for Smooth Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <!-- Canvas Confetti for Celebration Effects -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- BACKGROUND 3D CANVAS (GOLD PARTICLES & FLOATING PETALS) -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- FLOATING AMBIENT AUDIO CONTROLLER -->
+  <div class="audio-controller" id="audio-toggle" title="Toggle Wedding Harmony">
+    <div class="audio-icon-wrap">
+      <div class="audio-bars">
+        <span class="audio-bar"></span>
+        <span class="audio-bar"></span>
+        <span class="audio-bar"></span>
+        <span class="audio-bar"></span>
+      </div>
+    </div>
+    <span class="audio-label">Play Music</span>
+  </div>
+
+  <!-- =========================================================================
+       INITIAL 3D ENVELOPE UNSEALING CEREMONY
+       ========================================================================= -->
+  <div id="envelope-overlay">
+    <div class="envelope-wrapper">
+      <div class="envelope-3d">
+        <!-- Top Flap that folds up -->
+        <div class="envelope-flap-top"></div>
+
+        <!-- Inside Peek Card -->
+        <div class="peek-card">
+          <div class="peek-card-border">
+            <h4 class="peek-names">Constance & Onyekachi</h4>
+            <p class="peek-date">Sat. 28th Nov 2026</p>
+          </div>
+        </div>
+
+        <!-- Front Pocket -->
+        <div class="envelope-front-pocket"></div>
+
+        <!-- Embossed 3D Gold Wax Seal -->
+        <div class="wax-seal" id="wax-seal" title="Tap to Break Seal">
+          <span class="wax-seal-text">C&O</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="envelope-prompt">
+      <button class="unseal-btn" id="unseal-btn">
+        <i data-lucide="sparkles"></i> Open Invitation
+      </button>
+      <p class="envelope-tip">Click the gold wax seal to enter the celebration</p>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       ROYAL NAVIGATION BAR
+       ========================================================================= -->
+  <!-- =========================================================================
+       ROYAL NAVIGATION BAR & MOBILE DRAWER
+       ========================================================================= -->
+  <nav class="royal-nav" id="royal-nav">
+    <!-- Golden Hairline Scroll Progress Bar -->
+    <div class="nav-scroll-progress" id="nav-scroll-progress"></div>
+
+    <div class="nav-container">
+      <!-- Couple Monogram Brand -->
+      <a href="#hero" class="nav-monogram">
+        <div class="monogram-badge">C&O</div>
+        <div class="nav-brand-text">
+          <span class="monogram-text">Constance & Onyekachi</span>
+          <span class="nav-date-badge">28 • 11 • 2026</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links with ScrollSpy -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero" class="nav-item active">Invitation</a></li>
+        <li><a href="#rings" class="nav-item">3D Rings</a></li>
+        <li><a href="#countdown" class="nav-item">Countdown</a></li>
+        <li><a href="#venues" class="nav-item">Venues</a></li>
+        <li><a href="#colours" class="nav-item">Colours</a></li>
+        <li><a href="#registry" class="nav-item">Blessings</a></li>
+        <li><a href="#vip-pass" class="nav-item">VIP Pass</a></li>
+        <li><a href="#rsvp" class="nav-item">RSVP</a></li>
+      </ul>
+
+      <!-- Nav Actions (Desktop CTA + Mobile Hamburger) -->
+      <div class="nav-actions">
+        <a href="#rsvp" class="nav-cta">
+          <i data-lucide="mail-check" style="width: 14px; height: 14px;"></i> RSVP
+        </a>
+
+        <!-- Hamburger Toggle for Tablets/Mobile -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" title="Open Navigation Menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Slide-Out Drawer Overlay -->
+    <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+      <div class="drawer-header">
+        <div class="drawer-brand">
+          <div class="monogram-badge small">C&O</div>
+          <div>
+            <h4 class="drawer-title">Constance & Onyekachi</h4>
+            <span class="drawer-subtitle">28th Nov 2026 • Holy Matrimony</span>
+          </div>
+        </div>
+        <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">✕</button>
+      </div>
+
+      <ul class="mobile-nav-links">
+        <li><a href="#hero" class="mobile-link active"><i data-lucide="sparkles"></i> <span>Invitation</span></a></li>
+        <li><a href="#rings" class="mobile-link"><i data-lucide="gem"></i> <span>3D Rings Studio</span></a></li>
+        <li><a href="#countdown" class="mobile-link"><i data-lucide="hourglass"></i> <span>Live Countdown</span></a></li>
+        <li><a href="#venues" class="mobile-link"><i data-lucide="map-pin"></i> <span>Wedding Venues</span></a></li>
+        <li><a href="#colours" class="mobile-link"><i data-lucide="palette"></i> <span>Colours of the Day</span></a></li>
+        <li><a href="#registry" class="mobile-link"><i data-lucide="gift"></i> <span>Bless The Couple</span></a></li>
+        <li><a href="#vip-pass" class="mobile-link"><i data-lucide="ticket"></i> <span>Personalized VIP Pass</span></a></li>
+        <li><a href="#rsvp" class="mobile-link"><i data-lucide="mail-check"></i> <span>Confirm Attendance</span></a></li>
+      </ul>
+
+      <div class="drawer-footer">
+        <a href="https://wa.me/2347040182980" target="_blank" rel="noopener noreferrer" class="drawer-whatsapp-btn">
+          <i data-lucide="message-circle"></i> RSVP Line: 07040182980
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       MAIN PORTAL CONTAINER
+       ========================================================================= -->
+  <main class="main-wrapper">
+
+    <!-- HERO SECTION: 3D FLOATING GILDED CARD -->
+    <section class="hero-section" id="hero">
+      <div class="section-container">
+        
+        <div class="hero-grid">
+          <div class="invitation-card-3d-wrap">
+            <div class="invitation-card-3d">
+              
+              <!-- Gold Borders & Filigree Frame -->
+              <div class="card-gold-frame"></div>
+              <div class="card-gold-frame-inner"></div>
+              <div class="floral-corner top-left"></div>
+              <div class="floral-corner bottom-right"></div>
+
+              <div class="card-content-inner">
+                
+                <!-- The Families Announcement -->
+                <div class="card-families">
+                  <p class="card-family-title">The Families Of:</p>
+                  <h3 class="family-name">LATE REV. & MRS. DAVID NWOGWUGWU</h3>
+                  <div class="family-amp">&</div>
+                  <h3 class="family-name">PASTOR & MRS MAURICE ONYEDINMA</h3>
+                </div>
+
+                <!-- Cordial Invitation -->
+                <p class="card-request">Cordially request the pleasure of your presence to the</p>
+                
+                <h1 class="card-ceremony-title">SOLEMNIZATION OF</h1>
+                <h2 class="card-ceremony-sub">HOLY MATRIMONY</h2>
+
+                <p class="card-children-phrase">of their children</p>
+
+                <!-- Couple Calligraphy Names -->
+                <div class="card-couple-names">
+                  <span class="couple-name">Constance Onyinyechi David</span>
+                  <span class="couple-ampersand">&</span>
+                  <span class="couple-name">Onyekachi Onyedinma</span>
+                </div>
+
+                <!-- Filigree Separator -->
+                <div class="filigree-separator">
+                  <div class="filigree-wing"></div>
+                  <div class="filigree-center">✦ ⚜ ✦</div>
+                  <div class="filigree-wing right"></div>
+                </div>
+
+                <!-- Date & Church Venue Highlight -->
+                <div class="card-datetime-highlight">
+                  SAT. 28TH NOV 2026 | <span>10:00 AM</span>
+                </div>
+
+                <div class="card-location-box">
+                  <i data-lucide="map-pin"></i>
+                  <span><strong>St. Marks Anglican Church</strong>, No. 283 Old Aba Road, before FCMB, Oyigbo, Rivers State</span>
+                </div>
+
+                <!-- Reception & RSVP Grid -->
+                <div class="card-details-grid">
+                  <div class="card-detail-item">
+                    <h5>Reception Follows Immediately:</h5>
+                    <p><strong>Limewood Hotel Royale</strong>, Plot F6 Abacha Road, GRA Phase 3, Port Harcourt</p>
+                  </div>
+                  <div class="card-detail-item">
+                    <h5>RSVP Line:</h5>
+                    <p><strong>07040182980</strong></p>
+                    <h5>Colours:</h5>
+                    <p>Emerald Green, Champagne Gold, Burnt Orange, Burgundy</p>
+                  </div>
+                </div>
+
+                <!-- Toast Scripture Badge -->
+                <div class="card-toast-badge">
+                  <div>
+                    <p class="card-toast-verse">“I have found the one whom my soul loves”</p>
+                    <span class="card-toast-ref">SONGS OF SOLOMON 3:4</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Action Buttons -->
+          <div class="hero-actions">
+            <a href="#rsvp" class="btn-primary">
+              <i data-lucide="mail-check"></i> Send RSVP
+            </a>
+            <a href="#registry" class="btn-secondary">
+              <i data-lucide="gift"></i> Bless The Couple
+            </a>
+            <a href="#venues" class="btn-secondary">
+              <i data-lucide="navigation"></i> Directions & Venues
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION: 3D INTERACTIVE RINGS STUDIO
+         ========================================================================= -->
+    <section class="section-container rings-studio-section" id="rings">
+      <div class="section-header">
+        <span class="section-tag">Interactive 3D Exhibit</span>
+        <h2 class="section-title">The Eternal Embrace</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">💍</span>
+          <span class="divider-line right"></span>
+        </div>
+        <p style="color: rgba(250, 248, 242, 0.8); max-width: 600px; margin: 12px auto 0; font-size: 0.95rem; line-height: 1.6;">
+          Drag to orbit and inspect the custom interlocking golden wedding bands. Constance's solitaire diamond is set in 18K Champagne Gold alongside Onyekachi's comfort-fit royal band.
+        </p>
+      </div>
+
+      <div class="rings-studio-card">
+        <div class="ring-hint">
+          <i data-lucide="rotate-cw" style="width: 14px; height: 14px;"></i> Drag / Swipe to rotate 360°
+        </div>
+
+        <div class="rings-viewport-container">
+          <canvas id="rings-canvas"></canvas>
+        </div>
+
+        <div class="rings-overlay-controls">
+          <button class="ring-control-btn active" data-mode="gold">Champagne Gold</button>
+          <button class="ring-control-btn" data-mode="rosegold">Rose Gold</button>
+          <button class="ring-control-btn" data-mode="candle">Candlelit Warmth</button>
+          <button class="ring-control-btn" data-mode="emerald">Royal Emerald</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION: COUNTDOWN & ADD TO CALENDAR
+         ========================================================================= -->
+    <section class="section-container countdown-section" id="countdown">
+      <div class="section-header">
+        <span class="section-tag">The Blessed Moment</span>
+        <h2 class="section-title">Counting Down To The Union</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">⏳</span>
+          <span class="divider-line right"></span>
+        </div>
+        <p style="color: var(--gold-champagne); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; font-size: 0.9rem;">
+          Saturday, 28th November 2026 • 10:00 AM WAT
+        </p>
+      </div>
+
+      <div class="countdown-grid">
+        <div class="countdown-box">
+          <div class="countdown-number" id="cd-days">--</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-number" id="cd-hours">--</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-number" id="cd-minutes">--</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-number" id="cd-seconds">--</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      </div>
+
+      <div class="calendar-actions">
+        <a href="#" class="btn-primary" id="btn-google-calendar">
+          <i data-lucide="calendar-plus"></i> Add To Google Calendar
+        </a>
+        <a href="#" class="btn-secondary" id="btn-download-ics">
+          <i data-lucide="download"></i> Download .ICS Calendar File
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION: VENUES & DIRECTIONS
+         ========================================================================= -->
+    <section class="section-container" id="venues">
+      <div class="section-header">
+        <span class="section-tag">Locations & Schedule</span>
+        <h2 class="section-title">Wedding Venues</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">⛪</span>
+          <span class="divider-line right"></span>
+        </div>
+      </div>
+
+      <div class="venues-grid">
+        
+        <!-- Church Ceremony Card -->
+        <div class="venue-card">
+          <span class="venue-badge">
+            <i data-lucide="church" style="width: 14px; height: 14px;"></i> Holy Matrimony
+          </span>
+          <h3 class="venue-name">St. Marks Anglican Church</h3>
+          
+          <div class="venue-time">
+            <i data-lucide="clock" style="width: 18px; height: 18px; color: var(--gold-champagne);"></i>
+            <span>10:00 AM Prompt</span>
+          </div>
+
+          <div class="venue-address">
+            <i data-lucide="map-pin"></i>
+            <span>No. 283 Old Aba Road, before FCMB Bank, Oyigbo, Rivers State, Nigeria</span>
+          </div>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=St.+Marks+Anglican+Church+No.+283+Old+Aba+Road+Oyigbo+Rivers+State" target="_blank" rel="noopener noreferrer" class="btn-secondary venue-map-btn">
+            <i data-lucide="external-link"></i> Get Church Directions
+          </a>
+        </div>
+
+        <!-- Reception Card -->
+        <div class="venue-card">
+          <span class="venue-badge">
+            <i data-lucide="party-popper" style="width: 14px; height: 14px;"></i> Celebration & Banquet
+          </span>
+          <h3 class="venue-name">Limewood Hotel Royale</h3>
+          
+          <div class="venue-time">
+            <i data-lucide="clock" style="width: 18px; height: 18px; color: var(--gold-champagne);"></i>
+            <span>Follows Immediately</span>
+          </div>
+
+          <div class="venue-address">
+            <i data-lucide="map-pin"></i>
+            <span>Plot F6 Abacha Road, GRA Phase 3, Port Harcourt, Rivers State, Nigeria</span>
+          </div>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=Limewood+Hotel+Royale+Plot+F6+Abacha+Road+GRA+Phase+3+Port+Harcourt" target="_blank" rel="noopener noreferrer" class="btn-secondary venue-map-btn">
+            <i data-lucide="external-link"></i> Get Reception Directions
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION: COLOURS OF THE DAY (DRESS CODE)
+         ========================================================================= -->
+    <section class="section-container" id="colours">
+      <div class="section-header">
+        <span class="section-tag">Dress Code Palette</span>
+        <h2 class="section-title">Colours of the Day</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">🎨</span>
+          <span class="divider-line right"></span>
+        </div>
+        <p style="color: rgba(250, 248, 242, 0.8); max-width: 600px; margin: 12px auto 0; font-size: 0.95rem; line-height: 1.6;">
+          Join us in celebrating with our harmonious royal palette. Click on any color swatch to copy its hex code for your tailor or fabric selection!
+        </p>
+      </div>
+
+      <div class="palette-showcase">
+        <div class="palette-grid">
+          
+          <!-- Emerald Green -->
+          <div class="palette-card" data-hex="#094D36">
+            <div class="color-swatch emerald">
+              <span class="swatch-tag">#094D36</span>
+            </div>
+            <div class="palette-info">
+              <h4 class="palette-title">Emerald Green</h4>
+              <p class="palette-desc">Symbol of life, royal elegance, and divine fruitfulness. Ideal for traditional Aso Ebi, Agbada, and evening gowns.</p>
+              <span class="copy-hex-hint">Click to copy hex</span>
+            </div>
+          </div>
+
+          <!-- Champagne Gold -->
+          <div class="palette-card" data-hex="#E5C378">
+            <div class="color-swatch champagne">
+              <span class="swatch-tag">#E5C378</span>
+            </div>
+            <div class="palette-info">
+              <h4 class="palette-title">Champagne Gold</h4>
+              <p class="palette-desc">Shimmering festive glow representing joy, purity, and precious treasure. Accents, headties (gele), and jewelry.</p>
+              <span class="copy-hex-hint">Click to copy hex</span>
+            </div>
+          </div>
+
+          <!-- Burnt Orange -->
+          <div class="palette-card" data-hex="#C05820">
+            <div class="color-swatch orange">
+              <span class="swatch-tag">#C05820</span>
+            </div>
+            <div class="palette-info">
+              <h4 class="palette-title">Burnt Orange</h4>
+              <p class="palette-desc">Warm terracotta vibrancy bringing warmth, passion, and energetic African regalia splendor.</p>
+              <span class="copy-hex-hint">Click to copy hex</span>
+            </div>
+          </div>
+
+          <!-- Burgundy -->
+          <div class="palette-card" data-hex="#6B1426">
+            <div class="color-swatch burgundy">
+              <span class="swatch-tag">#6B1426</span>
+            </div>
+            <div class="palette-info">
+              <h4 class="palette-title">Burgundy</h4>
+              <p class="palette-desc">Deep romantic wine hue denoting enduring love, dignity, and sophisticated celebration styling.</p>
+              <span class="copy-hex-hint">Click to copy hex</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION: WEDDING REGISTRY, FINANCIAL BLESSINGS & GUEST SUPPORT
+         ========================================================================= -->
+    <section class="section-container registry-section" id="registry">
+      <div class="section-header">
+        <span class="section-tag">Wedding Gift & Support</span>
+        <h2 class="section-title">Bless The Couple</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">🎁</span>
+          <span class="divider-line right"></span>
+        </div>
+        <p style="color: rgba(250, 248, 242, 0.85); max-width: 680px; margin: 12px auto 0; font-size: 0.95rem; line-height: 1.6;">
+          Your prayers, presence, and love on our special day are the greatest gifts we could ever ask for. For beloved family and friends who have graciously asked how they can bless our new home, our transfer details are provided below.
+        </p>
+      </div>
+
+      <div class="registry-card-container">
+        
+        <!-- Heartfelt Note & Scripture -->
+        <div class="registry-note-card">
+          <p class="registry-note-text">
+            “Give, and it shall be given unto you; good measure, pressed down, and shaken together, and running over…”
+          </p>
+          <span class="registry-note-verse">LUKE 6:38 • THANK YOU FOR BLESSING OUR UNION</span>
+        </div>
+
+        <!-- Transfer Mode Tabs -->
+        <div class="registry-tabs">
+          <button class="registry-tab-btn active" data-tab="local">
+            <i data-lucide="building-2"></i> 🇳🇬 Local Transfers (Nigeria)
+          </button>
+          <button class="registry-tab-btn" data-tab="international">
+            <i data-lucide="globe"></i> 🌍 International Wire (Diaspora)
+          </button>
+        </div>
+
+        <!-- Panel 1: Local Transfers (Nigeria) -->
+        <div class="registry-panel active" id="panel-local">
+          <div class="account-cards-grid">
+            
+            <!-- First Bank Card (Bride: David Constance Onyinyechi) -->
+            <div class="account-card">
+              <div class="account-header">
+                <div class="account-bank-badge">
+                  <div class="bank-icon-box">
+                    <i data-lucide="landmark"></i>
+                  </div>
+                  <div>
+                    <h4 class="account-bank-name">First Bank of Nigeria</h4>
+                    <span style="font-size: 0.72rem; color: rgba(250, 248, 242, 0.6);">Official Account</span>
+                  </div>
+                </div>
+                <span class="account-currency-tag">NGN (₦)</span>
+              </div>
+
+              <div class="account-number-box">
+                <div class="account-number-label">Account Number</div>
+                <div class="account-number-digits">3149336090</div>
+              </div>
+
+              <div class="account-info-row">
+                <span class="account-info-label">Account Name:</span>
+                <span class="account-info-val">DAVID CONSTANCE ONYINYECHI</span>
+              </div>
+
+              <div class="account-info-row">
+                <span class="account-info-label">Bank Name:</span>
+                <span class="account-info-val">First Bank of Nigeria</span>
+              </div>
+
+              <button class="btn-copy-account" data-copy="3149336090" data-label="First Bank Account Number">
+                <i data-lucide="copy"></i> Copy Account Number
+              </button>
+            </div>
+
+            <!-- GTBank Card (Groom: Onyekachi Onyedinma) -->
+            <div class="account-card">
+              <div class="account-header">
+                <div class="account-bank-badge">
+                  <div class="bank-icon-box">
+                    <i data-lucide="landmark"></i>
+                  </div>
+                  <div>
+                    <h4 class="account-bank-name">Guaranty Trust Bank</h4>
+                    <span style="font-size: 0.72rem; color: rgba(250, 248, 242, 0.6);">GTBank PLC</span>
+                  </div>
+                </div>
+                <span class="account-currency-tag">NGN (₦)</span>
+              </div>
+
+              <div class="account-number-box">
+                <div class="account-number-label">Account Number</div>
+                <div class="account-number-digits">0730369478</div>
+              </div>
+
+              <div class="account-info-row">
+                <span class="account-info-label">Account Name:</span>
+                <span class="account-info-val">ONYEKACHI ONYEDINMA</span>
+              </div>
+
+              <div class="account-info-row">
+                <span class="account-info-label">Bank Name:</span>
+                <span class="account-info-val">Guaranty Trust Bank (GTBank)</span>
+              </div>
+
+              <button class="btn-copy-account" data-copy="0730369478" data-label="GTBank Account Number">
+                <i data-lucide="copy"></i> Copy Account Number
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Panel 2: International Wire Transfer -->
+        <div class="registry-panel" id="panel-international">
+          <div class="account-cards-grid" style="grid-template-columns: 1fr; max-width: 650px; margin-left: auto; margin-right: auto;">
+            
+            <div class="account-card">
+              <div class="account-header">
+                <div class="account-bank-badge">
+                  <div class="bank-icon-box">
+                    <i data-lucide="globe-2"></i>
+                  </div>
+                  <div>
+                    <h4 class="account-bank-name">Guaranty Trust Bank PLC</h4>
+                    <span style="font-size: 0.72rem; color: rgba(250, 248, 242, 0.6);">Lagos, Nigeria • International Wire</span>
+                  </div>
+                </div>
+                <span class="account-currency-tag">GLOBAL / WIRE</span>
+              </div>
+
+              <div class="account-number-box">
+                <div class="account-number-label">Beneficiary Account Number</div>
+                <div class="account-number-digits">0730369492</div>
+              </div>
+
+              <div class="account-info-row">
+                <span class="account-info-label">Beneficiary Name:</span>
+                <span class="account-info-val">ONYEDINMA ONYEKACHI</span>
+              </div>
+
+              <div class="account-info-row">
+                <span class="account-info-label">Bank Name & Location:</span>
+                <span class="account-info-val">Guaranty Trust Bank PLC, Lagos, Nigeria</span>
+              </div>
+
+              <div class="account-info-row">
+                <span class="account-info-label">GTBank SWIFT Code:</span>
+                <span class="account-info-val" style="color: var(--gold-bright); font-family: monospace; letter-spacing: 1px;">GTBINGLA</span>
+              </div>
+
+              <div class="account-info-row">
+                <span class="account-info-label">GTBank Sort Code:</span>
+                <span class="account-info-val" style="font-family: monospace;">058-215025</span>
+              </div>
+
+              <div class="account-info-row">
+                <span class="account-info-label">Transfer Purpose / Ref:</span>
+                <span class="account-info-val">Wedding Gift / Blessing</span>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;">
+                <button class="btn-copy-account" data-copy="0730369492" data-label="International Account Number">
+                  <i data-lucide="copy"></i> Copy A/C No.
+                </button>
+                <button class="btn-copy-account" data-copy="GTBINGLA" data-label="GTBank SWIFT Code">
+                  <i data-lucide="copy"></i> Copy SWIFT Code
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Logistics, Lodging & Event Concierge Support -->
+        <div class="support-concierge-grid">
+          
+          <div class="concierge-card">
+            <div class="concierge-icon">
+              <i data-lucide="hotel"></i>
+            </div>
+            <div class="concierge-info">
+              <h5>Hotel & Lodging</h5>
+              <p>For reservations at <strong>Limewood Hotel Royale</strong> or nearby luxury stays in GRA Phase 3 Port Harcourt, contact our protocol desk.</p>
+            </div>
+          </div>
+
+          <div class="concierge-card">
+            <div class="concierge-icon">
+              <i data-lucide="plane"></i>
+            </div>
+            <div class="concierge-info">
+              <h5>Airport Arrivals</h5>
+              <p>Arriving via <strong>Port Harcourt International Airport (Omagwa - PHC)</strong>. Travel time to GRA Phase 3 is approx. 35–45 minutes.</p>
+            </div>
+          </div>
+
+          <div class="concierge-card">
+            <div class="concierge-icon">
+              <i data-lucide="headphones"></i>
+            </div>
+            <div class="concierge-info">
+              <h5>Guest Support Hotline</h5>
+              <p>For inquiries, directions, or seat coordination: call or WhatsApp <a href="tel:07040182980" style="color: var(--gold-champagne); font-weight: 600; text-decoration: none;">07040182980</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION: PERSONALIZED VIP PASS GENERATOR
+         ========================================================================= -->
+    <section class="section-container vip-pass-section" id="vip-pass">
+      <div class="section-header">
+        <span class="section-tag">Custom Digital Keepsake</span>
+        <h2 class="section-title">Personalized VIP Pass</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">🎫</span>
+          <span class="divider-line right"></span>
+        </div>
+        <p style="color: rgba(250, 248, 242, 0.8); max-width: 600px; margin: 12px auto 0; font-size: 0.95rem; line-height: 1.6;">
+          Type your name below to personalize your Golden VIP Invitation Pass. You can download and save it to your phone or share on WhatsApp status!
+        </p>
+      </div>
+
+      <div class="vip-creator-card">
+        
+        <!-- Form Controls -->
+        <div class="vip-form-col">
+          <h3>Generate Your Golden Pass</h3>
+          <p>Customize your admission credential with your title and party details.</p>
+
+          <div class="form-group">
+            <label for="vip-input-name">Guest Name / Title</label>
+            <input type="text" id="vip-input-name" class="form-input" placeholder="e.g. Chief & Dr. Emmanuel Okonkwo" value="Honored Guest">
+          </div>
+
+          <div class="form-group">
+            <label for="vip-select-party">Guest Party Size</label>
+            <select id="vip-select-party" class="form-select">
+              <option value="Admit 1 Guest">Admit 1 Guest</option>
+              <option value="Admit 2 Guests (Couple)" selected>Admit 2 Guests (Couple)</option>
+              <option value="Admit Family (3-4 Guests)">Admit Family (3-4 Guests)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="vip-select-tier">Seating Tier</label>
+            <select id="vip-select-tier" class="form-select">
+              <option value="VIP Royal Gold Access" selected>VIP Royal Gold Access</option>
+              <option value="Distinguished Family Circle">Distinguished Family Circle</option>
+              <option value="Special Guest of Honor">Special Guest of Honor</option>
+            </select>
+          </div>
+
+          <button id="btn-download-pass" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+            <i data-lucide="download"></i> Download High-Res VIP Pass
+          </button>
+        </div>
+
+        <!-- Live 3D Ticket Preview -->
+        <div class="vip-ticket-preview-wrap">
+          <div class="vip-ticket">
+            
+            <div class="ticket-header">
+              <span class="ticket-brand">CONSTANCE & ONYEKACHI</span>
+              <span class="ticket-badge">VIP PASS</span>
+            </div>
+
+            <h4 class="ticket-guest-name" id="ticket-guest-name">Honored Guest</h4>
+            <p class="ticket-guest-tier" id="ticket-guest-tier">VIP Royal Gold Access • Admit 2 Guests (Couple)</p>
+
+            <div class="ticket-event-details">
+              <strong>Sat. 28th Nov 2026 | 10:00 AM</strong><br>
+              St. Marks Anglican Church, Oyigbo<br>
+              & Limewood Hotel Royale, Port Harcourt
+            </div>
+
+            <div class="ticket-footer">
+              <div class="ticket-qr">
+                <!-- SVG QR Code Icon -->
+                <svg viewBox="0 0 24 24" width="44" height="44" stroke="#043927" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+              </div>
+              <span class="ticket-code" id="ticket-code">CO-2811-9481</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION: RSVP & GUESTBOOK WALL
+         ========================================================================= -->
+    <section class="section-container rsvp-section" id="rsvp">
+      <div class="section-header">
+        <span class="section-tag">Confirm Attendance & Blessings</span>
+        <h2 class="section-title">RSVP & Well Wishes</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">💌</span>
+          <span class="divider-line right"></span>
+        </div>
+        <p style="color: rgba(250, 248, 242, 0.8); max-width: 600px; margin: 12px auto 0; font-size: 0.95rem; line-height: 1.6;">
+          Your presence will crown our joy. Please let us know if you can make it or share a warm prayer for the couple.
+        </p>
+      </div>
+
+      <div class="rsvp-guestbook-grid">
+        
+        <!-- RSVP Form & Quick Contact -->
+        <div class="rsvp-card">
+          <h3 style="font-family: var(--font-serif-royal); color: var(--gold-champagne); font-size: 1.3rem; margin-bottom: 8px;">Direct RSVP Line</h3>
+          <p style="font-size: 0.85rem; color: rgba(250,248,242,0.7); margin-bottom: 18px;">Quick confirmation via WhatsApp or Phone call directly to <strong>07040182980</strong>:</p>
+
+          <div class="direct-rsvp-box">
+            <a href="#" id="btn-whatsapp-direct" target="_blank" rel="noopener noreferrer" class="whatsapp-rsvp-btn">
+              <i data-lucide="message-circle"></i> RSVP via WhatsApp
+            </a>
+            <a href="tel:07040182980" class="call-rsvp-btn">
+              <i data-lucide="phone"></i> Call 07040182980
+            </a>
+          </div>
+
+          <div style="text-align: center; margin: 16px 0; color: var(--gold-champagne); font-size: 0.8rem; letter-spacing: 2px;">— OR FILL THE FORM BELOW —</div>
+
+          <form id="wedding-rsvp-form" name="wedding-rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="wedding-rsvp">
+            <p style="display:none">
+              <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+            </p>
+
+            <div class="form-group">
+              <label for="rsvp-name">Your Full Name / Family Title *</label>
+              <input type="text" id="rsvp-name" name="name" class="form-input" placeholder="e.g. Pastor David & Family" required>
+            </div>
+
+            <div class="form-group">
+              <label for="rsvp-phone">Phone / WhatsApp Number</label>
+              <input type="tel" id="rsvp-phone" name="phone" class="form-input" placeholder="e.g. 08012345678">
+            </div>
+
+            <div class="form-group">
+              <label for="rsvp-status">Will You Attend?</label>
+              <select id="rsvp-status" name="status" class="form-select">
+                <option value="Joyfully Attending (Ceremony & Reception)">Joyfully Attending (Ceremony & Reception)</option>
+                <option value="Attending Church Ceremony Only">Attending Church Ceremony Only</option>
+                <option value="Regretfully Unable to Attend in Person">Regretfully Unable to Attend in Person</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="rsvp-guests">Total Number of Guests</label>
+              <select id="rsvp-guests" name="guests" class="form-select">
+                <option value="1 Guest">1 Guest</option>
+                <option value="2 Guests" selected>2 Guests</option>
+                <option value="3 Guests">3 Guests</option>
+                <option value="4+ Guests">4+ Guests</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="rsvp-message">Prayers & Congratulations for the Couple</label>
+              <textarea id="rsvp-message" name="message" class="form-textarea" rows="3" placeholder="Share a heartwarming prayer or message for Constance & Onyekachi..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+              <i data-lucide="send"></i> Submit RSVP & Share Wishes
+            </button>
+          </form>
+        </div>
+
+        <!-- Guestbook Wall of Love -->
+        <div class="guestbook-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+            <h3 style="font-family: var(--font-serif-royal); color: var(--gold-champagne); font-size: 1.3rem;">Wall of Love & Prayers</h3>
+            <span style="font-size: 0.8rem; color: var(--gold-bright);"><i data-lucide="heart" style="width: 14px; height: 14px; fill: var(--burnt-orange); stroke: none;"></i> Live Blessings</span>
+          </div>
+
+          <div class="wishes-scroll-box" id="wishes-container">
+            <!-- Dynamically populated from js/rsvp.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  <!-- =========================================================================
+       RSVP SUBMISSION CELEBRATION MODAL
+       ========================================================================= -->
+  <div class="rsvp-modal-backdrop" id="rsvp-modal-backdrop">
+    <div class="rsvp-success-modal">
+      <div class="rsvp-modal-icon">🎉</div>
+      <h3 class="rsvp-modal-title" id="rsvp-modal-title">Attendance Confirmed!</h3>
+      <p class="rsvp-modal-desc" id="rsvp-modal-desc">
+        Your RSVP and prayers for Constance & Onyekachi have been recorded in our official celebration registry.
+      </p>
+
+      <div class="rsvp-modal-summary" id="rsvp-modal-summary">
+        <!-- Populated via rsvp.js -->
+      </div>
+
+      <div class="rsvp-modal-actions">
+        <a href="#" id="rsvp-modal-whatsapp" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-action">
+          <i data-lucide="message-circle"></i> Send Confirmation to 07040182980
+        </a>
+        <button id="rsvp-modal-close" class="btn-secondary" style="width: 100%; justify-content: center;">
+          Close & View Guestbook
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="wedding-footer">
+    <div class="footer-monogram">C & O</div>
+    <p class="footer-quote">“I have found the one whom my soul loves”</p>
+    <div class="footer-ref">SONGS OF SOLOMON 3:4</div>
+
+    <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 20px 0;">
+      <button onclick="window.replayUnsealing()" class="btn-secondary" style="font-size: 0.75rem; padding: 8px 20px;">
+        <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i> Replay Unsealing Ceremony
+      </button>
+      <a href="/api/export-csv" class="btn-secondary" style="font-size: 0.75rem; padding: 8px 20px;" title="Download full guest list for organizers">
+        <i data-lucide="download" style="width: 14px; height: 14px;"></i> Export Guest List (.CSV)
+      </a>
+    </div>
+
+    <p class="footer-credits">
+      Saturday, 28th November 2026 • Port Harcourt, Rivers State<br>
+      Made with love for Constance Onyinyechi David & Onyekachi Onyedinma
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/three-scene.js"></script>
+  <script src="js/envelope.js"></script>
+  <script src="js/countdown.js"></script>
+  <script src="js/vip-pass.js"></script>
+  <script src="js/rsvp.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
