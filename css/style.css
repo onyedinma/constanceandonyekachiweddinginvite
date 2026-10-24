@@ -1967,6 +1967,20 @@ body {
   margin-bottom: 40px;
 }
 
+.account-cards-single {
+  grid-template-columns: 1fr !important;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.account-actions-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
 .account-card {
   background: linear-gradient(145deg, rgba(6, 63, 44, 0.85) 0%, rgba(2, 34, 23, 0.95) 100%);
   border: 1.5px solid rgba(229, 195, 120, 0.4);
@@ -2264,17 +2278,10 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (TABLETS & MOBILE)
+   RESPONSIVE DESIGN (DESKTOP TO ULTRA-MOBILE BREAKPOINTS)
    ========================================================================== */
-@media (max-width: 900px) {
-  .vip-creator-card, .rsvp-guestbook-grid {
-    grid-template-columns: 1fr;
-  }
-  .countdown-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
+/* 1. Large Tablets & Small Laptops (<= 1024px) */
 @media (max-width: 1024px) {
   .nav-links {
     display: none !important;
@@ -2284,16 +2291,423 @@ body {
   }
 }
 
+/* 2. Tablets & Small Desktops (<= 900px) */
+@media (max-width: 900px) {
+  .vip-creator-card,
+  .rsvp-guestbook-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .countdown-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .account-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 3. Mobile Devices (<= 768px) - CORE MOBILE REFINEMENT */
 @media (max-width: 768px) {
+  /* Global Layout & Spacing */
+  .section-container {
+    padding: 60px 16px;
+  }
+  .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+  }
+  .section-title {
+    font-size: clamp(1.85rem, 6.5vw, 2.3rem);
+  }
+  .section-header p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    padding: 0 8px;
+  }
+
+  /* 3D Invitation Card */
   .invitation-card-3d {
-    padding: 28px 18px;
+    padding: 26px 16px;
+    border-radius: 20px;
   }
   .card-details-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
+  .card-couple-names {
+    font-size: clamp(2.4rem, 8vw, 3.2rem);
+  }
+
+  /* Calendar Actions & Venues on Mobile */
+  .calendar-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  .calendar-actions .btn-primary,
+  .calendar-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .venues-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .venue-card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+
+  /* ----------------------------------------------------
+     BLESS THE COUPLE (REGISTRY SECTION) - MOBILE PERFECTION
+     ---------------------------------------------------- */
+  .registry-card-container {
+    padding: 24px 14px;
+    border-radius: 20px;
+  }
+
+  .registry-note-card {
+    padding: 16px 14px;
+    margin-bottom: 22px;
+    border-radius: 14px;
+  }
+
+  .registry-note-text {
+    font-size: 0.96rem;
+    line-height: 1.5;
+  }
+
+  .registry-note-verse {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    margin-top: 8px;
+  }
+
+  /* Tabs Switcher */
+  .registry-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .registry-tab-btn {
+    padding: 12px 14px;
+    font-size: 0.76rem;
+    letter-spacing: 0.8px;
+    flex: 1 1 160px;
+    justify-content: center;
+    border-radius: 14px;
+    min-height: 48px;
+  }
+
+  /* Account Cards */
+  .account-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .account-card {
+    padding: 22px 16px;
+    border-radius: 16px;
+  }
+
+  .account-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+  }
+
+  .account-bank-name {
+    font-size: 0.92rem;
+  }
+
+  .account-currency-tag {
+    font-size: 0.65rem;
+    padding: 3px 7px;
+  }
+
+  /* Large, unmistakable Account Number Box */
+  .account-number-box {
+    padding: 16px 12px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1.5px solid rgba(229, 195, 120, 0.35);
+  }
+
+  .account-number-label {
+    font-size: 0.66rem;
+    letter-spacing: 1.5px;
+  }
+
+  .account-number-digits {
+    font-size: clamp(1.4rem, 6vw, 1.85rem);
+    letter-spacing: 2px;
+    word-break: break-all;
+  }
+
+  /* Clean Stacking for Account Info Rows on Mobile */
+  .account-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(229, 195, 120, 0.12);
+  }
+
+  .account-info-row:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 4px;
+  }
+
+  .account-info-label {
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+    color: rgba(229, 195, 120, 0.8);
+  }
+
+  .account-info-val {
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 600;
+    word-break: break-word;
+  }
+
+  /* Touch-optimized Copy Buttons */
+  .btn-copy-account {
+    padding: 13px 18px;
+    font-size: 0.82rem;
+    min-height: 48px;
+    border-radius: 30px;
+    width: 100%;
+  }
+
+  .account-actions-dual {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  /* Concierge Support Grid */
+  .support-concierge-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding-top: 24px;
+  }
+
+  .concierge-card {
+    padding: 16px 14px;
+    border-radius: 14px;
+    gap: 12px;
+  }
+
+  .concierge-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .concierge-info h5 {
+    font-size: 0.85rem;
+  }
+
+  .concierge-info p {
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  /* ----------------------------------------------------
+     RSVP & WELL WISHES SECTION - MOBILE PERFECTION
+     ---------------------------------------------------- */
+  .rsvp-guestbook-grid {
+    gap: 24px;
+  }
+
+  .rsvp-card,
+  .guestbook-card {
+    padding: 24px 16px;
+    border-radius: 20px;
+  }
+
+  .rsvp-card h3,
+  .guestbook-card h3 {
+    font-size: 1.25rem !important;
+  }
+
+  /* Direct WhatsApp & Call Buttons: Stacked & Thumb-Friendly */
+  .direct-rsvp-box {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .whatsapp-rsvp-btn,
+  .call-rsvp-btn {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 0.92rem;
+    border-radius: 40px;
+    min-height: 48px;
+    justify-content: center;
+  }
+
+  .whatsapp-rsvp-btn {
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  }
+
+  /* Form Elements: Touch Optimized & Anti-Zoom */
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 16px !important; /* Critical: Stops iOS Safari auto-zoom */
+    padding: 13px 14px;
+    border-radius: 12px;
+    min-height: 48px;
+    background: rgba(4, 57, 39, 0.75);
+  }
+
+  .form-textarea {
+    min-height: 95px;
+    line-height: 1.45;
+  }
+
+  /* Full-width High-Impact Submit Button */
+  .rsvp-card .btn-primary {
+    padding: 15px 20px;
+    font-size: 0.95rem;
+    min-height: 52px;
+    border-radius: 40px;
+    font-weight: 700;
+    box-shadow: 0 6px 22px rgba(212, 175, 55, 0.4);
+  }
+
+  /* Guestbook Wall on Mobile */
+  .wishes-scroll-box {
+    max-height: 380px;
+    padding-right: 4px;
+    gap: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .wish-item {
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+
+  .wish-author {
+    font-size: 0.86rem;
+  }
+
+  .wish-time {
+    font-size: 0.65rem;
+  }
+
+  .wish-text {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  /* Floating Audio Controller */
   .audio-controller {
-    bottom: 16px;
-    right: 16px;
-    padding: 8px 14px;
+    bottom: 14px;
+    right: 14px;
+    padding: 8px 12px;
+    gap: 8px;
+    border-radius: 40px;
+  }
+
+  .audio-sublabel {
+    display: none !important;
+  }
+
+  .audio-label {
+    font-size: 0.68rem;
+  }
+
+  /* Celebration Modal */
+  .rsvp-success-modal {
+    width: 94%;
+    max-width: 440px;
+    padding: 26px 18px;
+    border-radius: 22px;
+    margin: 10px auto;
+  }
+
+  .rsvp-modal-title {
+    font-size: 1.35rem;
+  }
+
+  .rsvp-modal-desc {
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+
+  .rsvp-modal-summary {
+    padding: 12px 14px;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  .btn-whatsapp-action {
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    min-height: 48px;
+  }
+}
+
+/* 4. Ultra-Small Phones (<= 400px, e.g. iPhone SE, Fold phones) */
+@media (max-width: 400px) {
+  .section-container {
+    padding: 50px 12px;
+  }
+
+  .registry-card-container,
+  .rsvp-card,
+  .guestbook-card {
+    padding: 18px 12px;
+    border-radius: 16px;
+  }
+
+  .registry-tabs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .registry-tab-btn {
+    width: 100%;
+  }
+
+  .account-card {
+    padding: 18px 12px;
+  }
+
+  .account-number-digits {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+  }
+
+  .account-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .account-currency-tag {
+    align-self: flex-start;
   }
 }
