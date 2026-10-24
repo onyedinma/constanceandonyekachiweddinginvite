@@ -40,8 +40,11 @@
   <!-- BACKGROUND 3D CANVAS (GOLD PARTICLES & FLOATING PETALS) -->
   <canvas id="bg-canvas"></canvas>
 
+  <!-- HTML5 AUDIO PLAYER: CHIKE & SIMI - RUNNING (TO YOU) -->
+  <audio id="wedding-audio-player" src="assets/audio/wedding-song.mp3" preload="auto" loop playsinline></audio>
+
   <!-- FLOATING AMBIENT AUDIO CONTROLLER -->
-  <div class="audio-controller" id="audio-toggle" title="Toggle Wedding Harmony">
+  <div class="audio-controller" id="audio-toggle" title="Playing: Running (To You) • Chike & Simi">
     <div class="audio-icon-wrap">
       <div class="audio-bars">
         <span class="audio-bar"></span>
@@ -50,7 +53,10 @@
         <span class="audio-bar"></span>
       </div>
     </div>
-    <span class="audio-label">Play Music</span>
+    <div class="audio-text-group" style="display: flex; flex-direction: column; text-align: left; line-height: 1.2;">
+      <span class="audio-label" style="font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-champagne); font-weight: 700;">Play Music</span>
+      <span class="audio-sublabel" style="font-size: 0.62rem; color: rgba(250, 248, 242, 0.65); letter-spacing: 0.5px;">Running (To You) • Chike & Simi</span>
+    </div>
   </div>
 
   <!-- =========================================================================

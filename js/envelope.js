@@ -70,15 +70,18 @@
         envelopeWrapper.classList.add('opening');
       }
 
-      // Audio Harps / Chimes
-      if (window.WeddingAudio && typeof window.WeddingAudio.playChime === 'function') {
-        window.WeddingAudio.playChime();
-        // Also start gentle ambient background music
-        setTimeout(() => {
-          if (!window.WeddingAudio.isPlaying()) {
-            window.WeddingAudio.togglePlay();
-          }
-        }, 1200);
+      // Audio Harps / Chimes & Wedding Song
+      if (window.WeddingAudio) {
+        if (typeof window.WeddingAudio.unsealAndPlay === 'function') {
+          window.WeddingAudio.unsealAndPlay();
+        } else if (typeof window.WeddingAudio.playChime === 'function') {
+          window.WeddingAudio.playChime();
+          setTimeout(() => {
+            if (!window.WeddingAudio.isPlaying()) {
+              window.WeddingAudio.togglePlay();
+            }
+          }, 1000);
+        }
       }
 
       // Golden & Emerald Confetti Cannon
