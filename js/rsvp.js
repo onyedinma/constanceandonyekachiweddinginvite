@@ -33,7 +33,7 @@
     }
   ];
 
-  // Load wishes from REST API, fallback to localStorage or defaults
+  // Load wishes from REST API (Netlify Functions), fallback to localStorage or defaults
   async function fetchWishes() {
     try {
       const res = await fetch('/api/wishes');
@@ -45,13 +45,15 @@
         }
       }
     } catch (e) {
-      // Offline or local static preview
+      console.log('Wishes API unavailable, using fallback');
     }
 
+    // Offline fallback: use localStorage cache
     const stored = localStorage.getItem('wedding_wishes');
     if (stored) {
       try {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
       } catch (e) {}
     }
 
@@ -162,7 +164,22 @@
           message
         };
 
-        // 1. Send to Netlify Forms & Local Backend API
+        // 1. Send to backend API (Netlify Functions)
+        let serverSaved = false;
+        try {
+          const apiRes = await fetch('/api/rsvp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (apiRes.ok) {
+            serverSaved = true;
+          }
+        } catch (err) {
+          console.log('Backend API unavailable, using local fallback');
+        }
+
+        // 2. Also try Netlify Forms (belt-and-suspenders)
         try {
           const formData = new FormData(rsvpForm);
           formData.append('form-name', 'wedding-rsvp');
@@ -172,18 +189,10 @@
             body: new URLSearchParams(formData).toString()
           });
         } catch (netlifyErr) {
-          // Not running on Netlify
+          // Not critical
         }
 
-        try {
-          await fetch('/api/rsvp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-        } catch (err) {}
-
-        // 2. Also cache in localStorage for instant offline access
+        // 3. Cache in localStorage as fallback for this visitor
         if (message) {
           const stored = localStorage.getItem('wedding_wishes');
           let wishes = [];
@@ -201,8 +210,8 @@
           localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
         }
 
-        // 3. Render updated wishes wall
-        renderWishes();
+        // 4. Re-fetch and render the latest wishes from the server
+        await renderWishes();
 
         // 4. Confetti blast
         if (typeof confetti === 'function') {

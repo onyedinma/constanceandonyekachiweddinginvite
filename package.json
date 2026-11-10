@@ -15,5 +15,8 @@
     "luxury"
   ],
   "author": "Antigravity",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.9"
+  }
 }
